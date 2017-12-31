@@ -10,6 +10,7 @@ namespace console_app
         {
             var log = new LoggerConfiguration()
                 .WriteTo.Console()    
+                .WriteTo.Http("http://localhost:8080")
                 .CreateLogger();
 
             

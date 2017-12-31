@@ -9,6 +9,7 @@
     <PackageReference Include="bogus" Version="21.0.5" />
     <PackageReference Include="serilog" Version="2.6.0" />
     <PackageReference Include="serilog.sinks.console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.Http" Version="4.2.1" />
   </ItemGroup>
 
 </Project>
