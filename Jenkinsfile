@@ -11,15 +11,15 @@ timestamps {
 
 			// Tag branches with their branch name if not master
 			if( env.BRANCH_NAME == "master" ) {
-				releaseImage = docker.build('elasticsearch', '--build-arg APP_PATH=${BUILD_TAG} ./elasticsearch')
-				releaseImage = docker.build('kibana', '--build-arg APP_PATH=${BUILD_TAG} ./kibana')
-				releaseImage = docker.build('logstash', '--build-arg APP_PATH=${BUILD_TAG} ./logstash')
+				elasticSearchImage = docker.build('elasticsearch', './elasticsearch')
+				kibanaImage = docker.build('kibana', './kibana')
+				logstashImage = docker.build('logstash', './logstash')
 			} else {
 				def BRANCH_NAME_LOWER = BRANCH_NAME.toLowerCase().replaceAll(" ","_")
 				// Non-env. variable needs double quotes to be parsed correctly (bash variables work better with single quotes)				
-				elasticSearchImage = docker.build("elasticsearch_${BRANCH_NAME_LOWER}", '--build-arg APP_PATH=${BUILD_TAG} ./elasticsearch')
-				kibanaImage = docker.build("kibana${BRANCH_NAME_LOWER}", '--build-arg APP_PATH=${BUILD_TAG} ./kibana')
-				logstashImage = docker.build("logstash${BRANCH_NAME_LOWER}", '--build-arg APP_PATH=${BUILD_TAG} ./logstash')							}
+				elasticSearchImage = docker.build("elasticsearch_${BRANCH_NAME_LOWER}", './elasticsearch')
+				kibanaImage = docker.build("kibana${BRANCH_NAME_LOWER}", './kibana')
+				logstashImage = docker.build("logstash${BRANCH_NAME_LOWER}", './logstash')							}
         
 			// Push the image with two tags:
 			//  - Incremental build number from Jenkins
@@ -30,7 +30,6 @@ timestamps {
 				elasticSearchImage.push("${env.BUILD_NUMBER}")
 				kibanaImage.push("${env.BUILD_NUMBER}")
 				logstashImage.push("${env.BUILD_NUMBER}")
-				
 				echo "Pushing Docker Image - latest"
 				elasticSearchImage.push("latest")
 				kibanaImage.push("latest")
