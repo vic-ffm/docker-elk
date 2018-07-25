@@ -4,4 +4,4 @@ FROM docker.elastic.co/kibana/kibana-oss:6.0.0
 # Add your kibana plugins setup here
 # Example: RUN kibana-plugin install <name|url>
 
-COPY ./kibana/config /usr/share/kibana/config
+COPY ./kibana/config/kibana.yml /usr/share/kibana/config/kibana.yml
